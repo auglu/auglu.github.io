@@ -1,122 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog - Friste</title>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      color: #ff2592;
-    }
-    body {
-      font-family: 'Fira Code', monospace;
-      font-size: 1rem;
-      background-color: #030308;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .container {
-      max-width: 600px;
-      width: 100%;
-      padding: 40px;
-      text-align: left;
-    }
-    .terminal {
-      font-family: 'Fira Code', monospace;
-      margin-bottom: 20px;
-    }
-    .command {
-      display: flex;
-      align-items: center;
-    }
-    .prompt {
-      margin-right: 10px;
-      opacity: 1;
-      transition: opacity 0.3s ease-in-out;
-    }
-    .prompt.fade-out {
-      opacity: 0;
-    }
-    .cursor {
-      display: inline-block;
-      width: 8px;
-      height: 1em;
-      background-color: #ff2592;
-      margin-left: 2px;
-      animation: blink 1s step-end infinite;
-    }
-    .result {
-      margin-top: 5px;
-    }
-    @keyframes blink {
-      from, to { opacity: 1; }
-      50% { opacity: 0; }
-    }
-    .email {
-      margin-bottom: 30px;
-    }
-    .back-link {
-      font-family: 'Fira Code', monospace;
-      margin-top: 30px;
-    }
-    a {
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    a:hover {
-      opacity: 0.7;
-    }
-    code {
-      display: block;
-      white-space: pre-wrap;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="terminal">
-      <div class="command">
-        <span class="prompt" id="prompt">$</span> <span id="command-text">cat blog.txt</span><span class="cursor"></span>
-      </div>
-    </div>
-    <div class="description">
-        Page in progress. This will mostly contain security writeups.
-    </div>
-    <div class="back-link">
-      <a href="index.html">← back</a>
-    </div>
-  </div>
+---
+layout: default
+title: Blog
+---
 
-  <script>
-    const promptCommands = [
-      { prompt: '$', command: 'cat blog.txt', delay: 3000 },
-      { prompt: 'C:\\Users\\friste>', command: 'type blog.txt', delay: 3000 },
-      { prompt: '%', command: 'cat blog.txt', delay: 3000 }
-    ];
-    let currentIndex = 0;
-    const promptElement = document.getElementById('prompt');
-    const commandText = document.getElementById('command-text');
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
 
-    function rotatePrompt() {
-      promptElement.classList.add('fade-out');
-      commandText.classList.add('fade-out');
-      setTimeout(() => {
-        currentIndex = (currentIndex + 1) % promptCommands.length;
-        promptElement.textContent = promptCommands[currentIndex].prompt;
-        commandText.textContent = promptCommands[currentIndex].command;
-        promptElement.classList.remove('fade-out');
-        commandText.classList.remove('fade-out');
-        setTimeout(rotatePrompt, promptCommands[currentIndex].delay);
-      }, 300);
-    }
-    setTimeout(rotatePrompt, promptCommands[0].delay);
-  </script>
-</body>
-</html> 

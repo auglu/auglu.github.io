@@ -1,0 +1,9 @@
+source: .
+incremental: false
+highlighter: rouge
+gist:
+  noscript: false
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge

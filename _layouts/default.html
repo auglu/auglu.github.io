@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    {% if page.title %}
+      {{ page.title }} - auglu
+    {% else %}
+      auglu
+    {% endif %}
+  </title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      color: #cca7ff;
+    }
+    body {
+      font-family: 'Fira Code', monospace;
+      font-size: 1rem;
+      background-color: #050308;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      max-width: 600px;
+      width: 100%;
+      padding: 40px;
+      text-align: left;
+    }
+    .terminal {
+      margin-bottom: 20px;
+    }
+    .command {
+      display: flex;
+      align-items: center;
+    }
+    .prompt {
+      margin-right: 10px;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .prompt.fade-out {
+      opacity: 0;
+    }
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1em;
+      background-color: #b478f9;
+      margin-left: 2px;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+      from, to { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .back-link {
+      font-family: 'Fira Code', monospace;
+      margin-top: 30px;
+    }
+    a {
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    a:hover {
+      opacity: 0.7;
+    }
+    code {
+      display: block;
+      white-space: pre-wrap;
+    }
+    .post-content p {
+      margin-bottom: 1em;
+    }
+    
+    .post-content ul {
+      margin-left: 1.5em;
+      margin-bottom: 1em;
+    }
+    
+    .post-content li {
+      margin-bottom: 0.3em;
+    }
+    
+    .post-content pre {
+      margin: 1em 0;
+      padding: 12px;
+      background: rgba(161, 37, 255, 0.05);
+      overflow-x: auto;
+    }
+    
+    .post-content code {
+      display: inline;
+      padding: 2px 4px;
+      background: rgba(124, 37, 255, 0.08);
+      border-radius: 3px;
+    }
+    
+    .post-content pre code {
+      display: block;
+      padding: 0;
+      background: none;
+    }
+        
+    .post-content img {
+      max-width: 100%;
+      margin: 1.5em 0;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="terminal">
+      <div class="command">
+        <span class="prompt" id="prompt">$</span>
+        <span id="command-text">ls blog</span>
+        <span class="cursor"></span>
+      </div>
+    </div>
+    {{ content }}
+    <div class="back-link">
+      <a href="index.html">← back</a>
+    </div>
+  </div>
+
+  <script>
+    const promptCommands = [
+      { prompt: '$', command: 'ls blog', delay: 3000 },
+      { prompt: 'C:\\\\Users\\\\auglu>', command: 'dir blog', delay: 3000 },
+      { prompt: '%', command: 'ls blog', delay: 3000 }
+    ];
+    let currentIndex = 0;
+    const promptElement = document.getElementById('prompt');
+    const commandText = document.getElementById('command-text');
+
+    function rotatePrompt() {
+      promptElement.classList.add('fade-out');
+      commandText.classList.add('fade-out');
+      setTimeout(() => {
+        currentIndex = (currentIndex + 1) % promptCommands.length;
+        promptElement.textContent = promptCommands[currentIndex].prompt;
+        commandText.textContent = promptCommands[currentIndex].command;
+        promptElement.classList.remove('fade-out');
+        commandText.classList.remove('fade-out');
+        setTimeout(rotatePrompt, promptCommands[currentIndex].delay);
+      }, 300);
+    }
+    setTimeout(rotatePrompt, promptCommands[0].delay);
+  </script>
+</body>
+</html>
