@@ -116,7 +116,7 @@ First, let's say you log onto `normal-bank-website` to check your bank account. 
 
 If `normal-bank-website` was poorly programmed to handle GET requests with side effects, the request could go through with your cookies attached and transfer funds from your account to theirs. The `SameSite=Lax` guardrail does not protect against this.
 
-## Cross-Site Scripting (again)
+### Cross-Site Scripting (again)
 XSS is actually more relevant here, because phishing is the most common use of XSS. As explained in **Web vulnerabilities**, attackers can arbitrarily inject code of their choosing on vulnerable websites, including code that creates fake phishing UIs:
 
 ```
