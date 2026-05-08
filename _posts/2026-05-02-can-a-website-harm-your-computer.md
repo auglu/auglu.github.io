@@ -24,6 +24,7 @@ Historically, the most common pathway in general involved using an exploit kit l
 - Browser type/version
 - OS type/version
 - Installed plugins
+
 The exploit kit then performs a search for an existing vulnerability in any of these components. Modern browsers and OSes update frequently and keep an eye out for these vulnerabilities, so exploits are rare and the chain typically ends here, and full-system compromise is extremely rare. However, if a valid vulnerability is found, the exploit gets delivered, its malware gets downloaded onto the victim's computer, and it may break out of the sandbox and execute it without any input. Again, this is often fragmented and in reality requires a chain of vulnerabilities to work.
 
 There's nothing you can do to counteract this type of attack, except to keep your browser and its plugins up-to-date. Be cautious and keep up with security news when using alternate browsers: these are usually built off forks of popular browsers, and there is a chance they may lag behind security updates or have a less active development team to respond to discovered vulnerabilities. Avoid obsolete, abandoned browser projects.
