@@ -68,6 +68,7 @@ MongoDB's update API also accepts update operators, so this gives us an operator
 | `$unset`       | Remove a field from the document.                      |
 | `$rename`      | Rename a field.                                        |
 | `$setOnInsert` | Set fields only when an upsert inserts a new document. |
+
 Still, it's not obvious what could be done with any of these to fetch `/flag` server-side. Variations of
 
 ```json
