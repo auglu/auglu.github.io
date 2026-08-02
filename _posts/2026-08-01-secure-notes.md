@@ -6,7 +6,7 @@ title: "JavaScript prototype pollution - HackTheBox challenge writeup (Secure No
 
 **Secure Notes** is a challenge in the Web category. It is a minimal notetaking application.
 
-![Secure Notes web UI](assets/images/secure-notes/ui.png)
+![Secure Notes web UI](/assets/images/secure-notes/ui.png)
 
 Upon inspecting the source code, we see that this is a Node application. There are several endpoints, and it is using MongoDB to store created notes. The target endpoint `/flag` is restricted to localhost:
 
@@ -127,7 +127,7 @@ This payload gets sent to `/create`:
 }
 ```
 
-![Burp Suite screenshot of POST request to create endpoint showing successful creation](assets/images/secure-notes/create.png)
+![Burp Suite screenshot of POST request to create endpoint showing successful creation](/assets/images/secure-notes/create.png)
 
 At this point, we have
 
@@ -144,7 +144,7 @@ The `$rename` operator we looked at earlier allows us to change the key `title` 
 }
 ```
 
-![Burp Suite screenshot of POST request to update endpoint](assets/images/secure-notes/update.png)
+![Burp Suite screenshot of POST request to update endpoint](/assets/images/secure-notes/update.png)
 
 This is successfully saved to the database, and on the surface, you'd naively expect the note to have a literal key:
 
@@ -177,4 +177,4 @@ app.get('/flag', (req, res) => {
 
 This supplies the address being read. We can just get the flag now that the server will read `req.connection.remoteAddress` as `::ffff:127.0.0.1`:
 
-![Burp Suite screenshot of GET request to flag endpoint revealing the flag content](assets/images/secure-notes/flag.png)
+![Burp Suite screenshot of GET request to flag endpoint revealing the flag content](/assets/images/secure-notes/flag.png)
